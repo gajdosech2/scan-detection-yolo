@@ -1,7 +1,7 @@
 data/
 
 .idea
-__pycache__/
+*/__pycache__/
 *.h5
 .ipynb_checkpoints
 

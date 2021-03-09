@@ -1,0 +1,33 @@
+<Imageset autoScaled="false" imagefile="icons-16px.png" name="Icons16px" nativeHorzRes="108" nativeVertRes="36" version="2">
+    <Image height="16" name="edit" width="16" xPos="0" yPos="16" />
+    <Image height="16" name="back" width="16" xPos="16" yPos="0" />
+    <Image height="16" name="zoom" width="16" xPos="32" yPos="0" />
+    <Image height="16" name="close" width="16" xPos="48" yPos="0" />
+    <Image height="16" name="config" width="16" xPos="64" yPos="0" />
+    <Image height="16" name="up" width="16" xPos="80" yPos="0" />
+    <Image height="16" name="down" width="16" xPos="80" yPos="16" />
+    <Image height="16" name="pin" width="16" xPos="64" yPos="16" />
+    <Image height="16" name="directory" width="16" xPos="48" yPos="32" />
+    <Image height="16" name="settings" width="16" xPos="32" yPos="16" />
+    <Image height="16" name="info" width="16" xPos="16" yPos="16" />
+    <Image height="16" name="home" width="16" xPos="0" yPos="0" />
+    <Image height="16" name="right" width="16" xPos="96" yPos="0" />
+    <Image height="16" name="left" width="16" xPos="96" yPos="16" />
+    <Image height="16" name="camera" width="16" xPos="16" yPos="32" />
+    <Image height="16" name="poweroff" width="16" xPos="64" yPos="32" />
+    <Image height="16" name="save" width="16" xPos="0" yPos="32" />
+    <Image height="16" name="sel_all" width="16" xPos="32" yPos="48" />
+    <Image height="16" name="cube" width="16" xPos="64" yPos="48" />
+    <Image height="16" name="stop" width="16" xPos="112" yPos="0" />
+    <Image height="16" name="pause" width="16" xPos="112" yPos="16" />
+    <Image height="16" name="file" width="16" xPos="32" yPos="32" />
+    <Image height="16" name="sync" width="16" xPos="128" yPos="0" />
+    <Image height="16" name="add" width="16" xPos="80" yPos="32" />
+    <Image height="16" name="download" width="16" xPos="16" yPos="48" />
+    <Image height="16" name="upload" width="16" xPos="0" yPos="48" />
+    <Image height="16" name="sel_none" width="16" xPos="48" yPos="48" />
+    <Image height="16" name="remove" width="16" xPos="48" yPos="16" />
+    <Image height="16" name="check" width="16" xPos="96" yPos="32" />
+    <Image height="16" name="video" width="16" xPos="80" yPos="48" />
+    <Image height="16" name="list" width="16" xPos="96" yPos="48" />
+</Imageset>

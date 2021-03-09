@@ -14,26 +14,24 @@ from utils import get_random_data
 
 
 def train(annotation_path, classes_path, anchors_path):
-    log_dir = 'logs/'
+    log_dir = 'yolo/logs/'
     class_names = get_classes(classes_path)
     num_classes = len(class_names)
     anchors = get_anchors(anchors_path)
-
     input_shape = (416, 416) # multiple of 32, hw
 
     is_tiny_version = len(anchors)==6 # default setting
     if is_tiny_version:
-        model = create_tiny_model(input_shape, anchors, num_classes, load_pretrained=False, 
-            freeze_body=2, weights_path='model_data/tiny_yolo_weights.h5')
+        model = create_tiny_model(input_shape, anchors, num_classes, load_pretrained=False, freeze_body=2)
     else:
-        model = create_model(input_shape, anchors, num_classes, load_pretrained=False, 
-            freeze_body=2, weights_path='model_data/yolo_weights.h5') # make sure you know what you freeze
+        model = create_model(input_shape, anchors, num_classes, load_pretrained=False, freeze_body=2) 
+        # make sure you know what you freeze
 
     logging = TensorBoard(log_dir=log_dir)
     checkpoint = ModelCheckpoint(log_dir + 'ep{epoch:03d}-loss{loss:.3f}-val_loss{val_loss:.3f}.h5',
         monitor='val_loss', save_weights_only=True, save_best_only=True, period=3)
     reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=3, verbose=1)
-    early_stopping = EarlyStopping(monitor='val_loss', min_delta=0, patience=10, verbose=1)
+    early_stopping = EarlyStopping(monitor='val_loss', min_delta=0, patience=20, verbose=1)
 
     val_split = 0.1
     with open(annotation_path) as f:
@@ -100,11 +98,11 @@ def get_anchors(anchors_path):
 
 
 def create_model(input_shape, anchors, num_classes, load_pretrained=True, freeze_body=2,
-            weights_path='model_data/yolo_weights.h5'):
+            weights_path='yolo_weights.h5'):
     '''create the training model'''
     K.clear_session() # get a new session
-    image_input = Input(shape=(None, None, 3))
     h, w = input_shape
+    image_input = Input(shape=(None, None, 4))
     num_anchors = len(anchors)
 
     y_true = [Input(shape=(h//{0:32, 1:16, 2:8}[l], w//{0:32, 1:16, 2:8}[l], \
@@ -130,11 +128,11 @@ def create_model(input_shape, anchors, num_classes, load_pretrained=True, freeze
     return model
 
 def create_tiny_model(input_shape, anchors, num_classes, load_pretrained=True, freeze_body=2,
-            weights_path='model_data/tiny_yolo_weights.h5'):
+            weights_path='tiny_yolo_weights.h5'):
     '''create the training model, for Tiny YOLOv3'''
     K.clear_session() # get a new session
-    image_input = Input(shape=(None, None, 3))
     h, w = input_shape
+    image_input = Input(shape=(None, None, 4))
     num_anchors = len(anchors)
 
     y_true = [Input(shape=(h//{0:32, 1:16}[l], w//{0:32, 1:16}[l], \

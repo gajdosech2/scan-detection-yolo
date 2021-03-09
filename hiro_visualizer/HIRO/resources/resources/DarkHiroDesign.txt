@@ -1,0 +1,40 @@
+Text Normal
+  FFBEBEBE (190 190 190)
+Text Highlihted
+  FFF0F0F0 (240 240 240)
+Text Disabled
+  FF828282 (130 130 130)
+
+Render Areas
+  FF3D3D3D (61 61 61)
+
+Sidebar
+  FF383838 (56 56 56)
+
+Basic Panel
+  FF454545 (69 69 69)
+Editors, Lists and Spinners
+  FF2B2B2B (43 43 43)
+Controls, Buttons and Combos  
+  FF5D5D5D (93 93 93)
+Highlighted Buttons
+  FF828282 (130 130 130)
+
+Blue Highlight	
+  FF435B72 (67 91 114)
+
+Toggle Highlight	
+  FF0098E7
+Toggle Highlight Disabled
+  FF435B72
+
+____________|__Normal__|_Highlight|_Disabled_|
+Default		  | FF5D5D5D | FF828282 | FF5D5D5D | 
+Red			    | FFF23C50 | FFFF5B6A | FFB52B3B | 
+Green		    | FF11B252 | FF16DF67 | FF1F733F | 
+Blue		    | FF0098E7 | FF47C1FF | FF435B72 | 
+Turquoise	  | FF24AFB1 | FF54D8D4 | FF12757F | 
+Yellow	    | FFFFD75E | FFFFEC82 | FFC9AE61 | 
+# Button Labels
+Default		  | FFBEBEBE | FFF0F0F0 | FF828282 |
+Colored		  | FF000000 | FF5D5D5D | FF454545 | 

@@ -69,8 +69,8 @@ class YOLO(object):
         try:
             self.yolo_model = load_model(model_path, compile=False)
         except:
-            self.yolo_model = tiny_yolo_body(Input(shape=(None,None,3)), num_anchors//2, num_classes) \
-                if is_tiny_version else yolo_body(Input(shape=(None,None,3)), num_anchors//3, num_classes)
+            self.yolo_model = tiny_yolo_body(Input(shape=(None,None,4)), num_anchors//2, num_classes) \
+                if is_tiny_version else yolo_body(Input(shape=(None,None,4)), num_anchors//3, num_classes)
             self.yolo_model.load_weights(self.model_path) # make sure model, anchors and classes match
         else:
             assert self.yolo_model.layers[-1].output_shape[-1] == \
@@ -126,9 +126,10 @@ class YOLO(object):
 
         print('Found {} boxes for {}'.format(len(out_boxes), 'img'))
 
-        font = ImageFont.truetype(font='yolo/FiraMono-Medium.otf', size=np.floor(3e-2 * image.size[1] + 0.5).astype('int32'))
+        font = ImageFont.truetype(font='arial.ttf',
+                    size=np.floor(3e-2 * image.size[1] + 0.5).astype('int32'))
         thickness = (image.size[0] + image.size[1]) // 300
-
+        result = []
         for i, c in reversed(list(enumerate(out_classes))):
             predicted_class = self.class_names[c]
             box = out_boxes[i]
@@ -144,6 +145,7 @@ class YOLO(object):
             bottom = min(image.size[1], np.floor(bottom + 0.5).astype('int32'))
             right = min(image.size[0], np.floor(right + 0.5).astype('int32'))
             print(label, (left, top), (right, bottom))
+            result.append((left, top, right, bottom, c))
 
             if top - label_size[1] >= 0:
                 text_origin = np.array([left, top - label_size[1]])
@@ -163,7 +165,7 @@ class YOLO(object):
 
         end = timer()
         print(end - start)
-        return image
+        return image, result
 
     def close_session(self):
         self.sess.close()

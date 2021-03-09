@@ -26,7 +26,7 @@ def letterbox_image(image, size):
     nh = int(ih*scale)
 
     image = image.resize((nw,nh), Image.BICUBIC)
-    new_image = Image.new('RGB', size, (128,128,128))
+    new_image = Image.new(''.join(image.getbands()), size, (128,128,128))
     new_image.paste(image, ((w-nw)//2, (h-nh)//2))
     return new_image
 
@@ -51,7 +51,7 @@ def get_random_data(annotation_line, input_shape, random=True, max_boxes=20, jit
         image_data=0
         if proc_img:
             image = image.resize((nw,nh), Image.BICUBIC)
-            new_image = Image.new('RGB', (w,h), (128,128,128))
+            new_image = Image.new(''.join(image.getbands()), (w,h), (128,128,128))
             new_image.paste(image, (dx, dy))
             image_data = np.array(new_image)/255.
 
@@ -80,8 +80,10 @@ def get_random_data(annotation_line, input_shape, random=True, max_boxes=20, jit
     # place image
     dx = int(rand(0, w-nw))
     dy = int(rand(0, h-nh))
-    new_image = Image.new('RGB', (w,h), (128,128,128))
+        
+    new_image = Image.new(''.join(image.getbands()), (w,h), (128,128,128))
     new_image.paste(image, (dx, dy))
+  
     image = new_image
 
     # flip image or not
@@ -92,7 +94,14 @@ def get_random_data(annotation_line, input_shape, random=True, max_boxes=20, jit
     hue = rand(-hue, hue)
     sat = rand(1, sat) if rand()<.5 else 1/rand(1, sat)
     val = rand(1, val) if rand()<.5 else 1/rand(1, val)
-    x = rgb_to_hsv(np.array(image)/255.)
+    
+    image_array = np.array(image)/255.
+      
+    if (image_array.shape[2] == 4):
+        alpha = image_array[:, :, 3]
+        alpha = np.expand_dims(alpha, axis=2)
+
+    x = rgb_to_hsv(image_array[:, :, :3])
     x[..., 0] += hue
     x[..., 0][x[..., 0]>1] -= 1
     x[..., 0][x[..., 0]<0] += 1
@@ -101,6 +110,9 @@ def get_random_data(annotation_line, input_shape, random=True, max_boxes=20, jit
     x[x>1] = 1
     x[x<0] = 0
     image_data = hsv_to_rgb(x) # numpy array, 0 to 1
+    
+    if (image_array.shape[2] == 4):
+        image_data = np.concatenate((image_data, alpha), axis=2)
 
     # correct boxes
     box_data = np.zeros((max_boxes,5))

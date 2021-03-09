@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="ViewArea" >
+        <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="DefaultWindow" name="render_canvas" >
+            <Property name="Area" value="{{0,0},{0,0},{1,-300},{1,0}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Window type="DarkHiro/PushButton" name="btn_toggle_sidebar" >
+                <Property name="Area" value="{{0,0},{0,0},{0,25},{0,30}}" />
+                <Property name="Glyph" value="Icons16px/right" />
+                <Property name="RenderBackground" value="false" />
+                <Property name="HorizontalAlignment" value="Right" />
+            </Window>
+        </Window>
+        <Window type="DarkHiro/Panel" name="sidebar" >
+            <Property name="Area" value="{{1,-300},{0,0},{1,0},{1,0}}" />
+            <Property name="Color" value="FF383838" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Window type="DarkHiro/ScrollablePanel" name="scroll_panel" >
+                <Property name="Area" value="{{0,0},{0,37},{1,0},{1,0}}" />
+                <Property name="Color" value="FF333333" />
+                <Property name="RenderBackground" value="false" />
+                <Property name="ForceVertScrollbar" value="true" />
+                <AutoWindow namePath="__auto_container__" >
+                    <Property name="MouseInputPropagationEnabled" value="true" />
+                </AutoWindow>
+                <AutoWindow namePath="__auto_hscrollbar__" >
+                    <Property name="AlwaysOnTop" value="true" />
+                    <AutoWindow namePath="__auto_incbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                    <AutoWindow namePath="__auto_decbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                </AutoWindow>
+                <AutoWindow namePath="__auto_vscrollbar__" >
+                    <Property name="AlwaysOnTop" value="true" />
+                    <AutoWindow namePath="__auto_incbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                    <AutoWindow namePath="__auto_decbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                </AutoWindow>
+            </Window>
+            <Window type="DefaultWindow" name="toolbar" >
+                <Property name="Area" value="{{0,0},{0,0},{1,0},{0,30}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Window type="DarkHiro/PushButton" name="toggle_video" >
+                    <Property name="Area" value="{{0,5},{0,0},{0,32},{0,27}}" />
+                    <Property name="Glyph" value="Icons16px/video" />
+                    <Property name="VerticalAlignment" value="Bottom" />
+                </Window>
+                <Window type="DarkHiro/PushButton" name="toggle_options" >
+                    <Property name="Area" value="{{0,-5},{0,0},{0,22},{0,27}}" />
+                    <Property name="Glyph" value="Icons16px/config" />
+                    <Property name="VerticalAlignment" value="Bottom" />
+                    <Property name="HorizontalAlignment" value="Right" />
+                </Window>
+            </Window>
+        </Window>
+    </Window>
+</GUILayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<GUIScheme version="5" name="DarkHiro">
+    <Imageset filename="DarkHiro.imageset" />
+    <Imageset filename="icons-16px.imageset" />
+    <Imageset filename="icons-18px.imageset" />
+    <Font filename="InriaSans-9-Normal.font" />
+    <Font filename="InriaSans-9-Italic.font" />
+    <Font filename="InriaSans-10-Normal.font" />
+    <Font filename="InriaSans-10-Bold.font" />
+    <Font filename="InriaSans-12-Normal.font" />
+    <Font filename="InriaSans-16-Normal.font" />
+    <LookNFeel filename="DarkHiro.looknfeel" />
+    <WindowRendererSet filename="CEGUICoreWindowRendererSet" />
+
+    <FalagardMapping windowType="DarkHiro/Panel"            targetType="DefaultWindow"          renderer="Core/Default"         lookNFeel="DarkHiro/Panel" />
+    <FalagardMapping windowType="DarkHiro/SeparatorHor"     targetType="DefaultWindow"          renderer="Core/Default"         lookNFeel="DarkHiro/SeparatorHor" />
+    <FalagardMapping windowType="DarkHiro/SeparatorVer"     targetType="DefaultWindow"          renderer="Core/Default"         lookNFeel="DarkHiro/SeparatorVer" />
+    <FalagardMapping windowType="DarkHiro/Label"            targetType="DefaultWindow"          renderer="Core/Default"         lookNFeel="DarkHiro/Label" />
+    <FalagardMapping windowType="DarkHiro/PushButton"       targetType="CEGUI/PushButton"       renderer="Core/Button"          lookNFeel="DarkHiro/PushButton" />
+    <FalagardMapping windowType="DarkHiro/TouchPushButton"  targetType="CEGUI/PushButton"       renderer="Core/Button"          lookNFeel="DarkHiro/TouchPushButton" />
+    <FalagardMapping windowType="DarkHiro/ToggleButton"     targetType="CEGUI/ToggleButton"     renderer="Core/ToggleButton"    lookNFeel="DarkHiro/ToggleButton" />
+    <FalagardMapping windowType="DarkHiro/ToggleSlider"     targetType="CEGUI/ToggleButton"     renderer="Core/ToggleButton"    lookNFeel="DarkHiro/ToggleSlider" />
+    <FalagardMapping windowType="DarkHiro/Checkbox"         targetType="CEGUI/ToggleButton"     renderer="Core/ToggleButton"    lookNFeel="DarkHiro/Checkbox" />
+    <FalagardMapping windowType="DarkHiro/Editbox"          targetType="CEGUI/Editbox"          renderer="Core/Editbox"         lookNFeel="DarkHiro/Editbox" />
+    <FalagardMapping windowType="DarkHiro/Thumb"            targetType="CEGUI/Thumb"            renderer="Core/Button"          lookNFeel="DarkHiro/Thumb" />
+    <FalagardMapping windowType="DarkHiro/Slider"           targetType="CEGUI/Slider"           renderer="Core/Slider"          lookNFeel="DarkHiro/Slider" />
+    <FalagardMapping windowType="DarkHiro/ScrollHandle"     targetType="CEGUI/Thumb"            renderer="Core/Button"          lookNFeel="DarkHiro/ScrollHandle" />
+    <FalagardMapping windowType="DarkHiro/ScrollbarVer"     targetType="CEGUI/Scrollbar"        renderer="Core/Scrollbar"       lookNFeel="DarkHiro/ScrollbarVer" />
+    <FalagardMapping windowType="DarkHiro/ScrollbarHor"     targetType="CEGUI/Scrollbar"        renderer="Core/Scrollbar"       lookNFeel="DarkHiro/ScrollbarHor" />
+    <FalagardMapping windowType="DarkHiro/ScrollablePanel"  targetType="CEGUI/ScrollablePane"   renderer="Core/ScrollablePane"  lookNFeel="DarkHiro/ScrollablePanel" />
+    <FalagardMapping windowType="DarkHiro/ScrollPanelTouch" targetType="CEGUI/ScrollablePane"   renderer="Core/ScrollablePane"  lookNFeel="DarkHiro/ScrollPanelTouch" />
+    <FalagardMapping windowType="DarkHiro/VertScrollPanel"  targetType="CEGUI/ScrollablePane"   renderer="Core/ScrollablePane"  lookNFeel="DarkHiro/VertScrollPanel" />
+    <FalagardMapping windowType="DarkHiro/StaticImage"      targetType="DefaultWindow"          renderer="Core/StaticImage"     lookNFeel="DarkHiro/StaticImage" />
+    <FalagardMapping windowType="DarkHiro/WaitCircle"       targetType="DefaultWindow"          renderer="Core/Default"         lookNFeel="DarkHiro/WaitCircle" />
+    <FalagardMapping windowType="DarkHiro/ColorRect"        targetType="DefaultWindow"          renderer="Core/Default"         lookNFeel="DarkHiro/ColorRect" />
+    <FalagardMapping windowType="DarkHiro/Spinner"          targetType="CEGUI/Spinner"          renderer="Core/Default"         lookNFeel="DarkHiro/Spinner" />
+    <FalagardMapping windowType="DarkHiro/ItemListbox"      targetType="CEGUI/ItemListbox"      renderer="Core/ItemListbox"     lookNFeel="DarkHiro/Listbox" />
+    <FalagardMapping windowType="DarkHiro/ListboxItem"      targetType="CEGUI/ItemEntry"        renderer="Core/ItemEntry"       lookNFeel="DarkHiro/ListboxItem" />
+    <FalagardMapping windowType="DarkHiro/ComboDropList"    targetType="CEGUI/ComboDropList"    renderer="Core/Listbox"         lookNFeel="DarkHiro/Listbox" />
+    <FalagardMapping windowType="DarkHiro/ComboEditbox"     targetType="CEGUI/Editbox"          renderer="Core/Editbox"         lookNFeel="DarkHiro/ComboEditbox" />
+    <FalagardMapping windowType="DarkHiro/ComboButton"      targetType="CEGUI/PushButton"       renderer="Core/Button"          lookNFeel="DarkHiro/ComboButton" />
+    <FalagardMapping windowType="DarkHiro/Combobox"         targetType="CEGUI/Combobox"         renderer="Core/Default"         lookNFeel="DarkHiro/Combobox" />
+    <FalagardMapping windowType="DarkHiro/ProgressBar"      targetType="CEGUI/ProgressBar"      renderer="Core/ProgressBar"     lookNFeel="DarkHiro/ProgressBar" />
+    <FalagardMapping windowType="DarkHiro/FrameWindow"      targetType="CEGUI/FrameWindow"      renderer="Core/FrameWindow"     lookNFeel="DarkHiro/FrameWindow" />
+    <FalagardMapping windowType="DarkHiro/Titlebar"         targetType="CEGUI/Titlebar"         renderer="Core/Titlebar"        lookNFeel="DarkHiro/Titlebar" />
+    <FalagardMapping windowType="DarkHiro/StaticText"       targetType="DefaultWindow"          renderer="Core/StaticText"      lookNFeel="DarkHiro/StaticText" />
+    <FalagardMapping windowType="DarkHiro/Tooltip"          targetType="CEGUI/Tooltip"          renderer="Core/Tooltip"         lookNFeel="DarkHiro/Tooltip" />
+    <FalagardMapping windowType="DarkHiro/ArrayPanel"       targetType="DefaultWindow"          renderer="Core/Default"         lookNFeel="DarkHiro/ArrayPanel" />
+    <FalagardMapping windowType="DarkHiro/StatusIcon"       targetType="DefaultWindow"          renderer="Core/Default"         lookNFeel="DarkHiro/StatusIcon" />
+</GUIScheme>

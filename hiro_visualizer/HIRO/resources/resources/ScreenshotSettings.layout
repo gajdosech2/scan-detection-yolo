@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DarkHiro/FrameWindow" name="FrameWindow" >
+        <Property name="Area" value="{{0,-135},{0,-37.5},{0,215},{0,237.5}}" />
+        <Property name="Text" value="Screenshot parameters" />
+        <Property name="SizingEnabled" value="false" />
+        <Property name="VerticalAlignment" value="Centre" />
+        <Property name="HorizontalAlignment" value="Centre" />
+        <AutoWindow namePath="__auto_titlebar__" >
+            <Property name="Font" value="" />
+            <Property name="AlwaysOnTop" value="false" />
+        </AutoWindow>
+        <Window type="DarkHiro/Panel" name="Panel" >
+            <Property name="Area" value="{{0,0},{0,-2},{1,0},{1,-2}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Window type="DarkHiro/Label" name="Label" >
+                <Property name="Area" value="{{0,12},{0,49},{0,83},{0,79}}" />
+                <Property name="Text" value="Filename" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="LeftAligned" />
+            </Window>
+            <Window type="DarkHiro/Label" name="Label2" >
+                <Property name="Area" value="{{0,12},{0,13},{0,83},{0,43}}" />
+                <Property name="Text" value="Directory" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="LeftAligned" />
+            </Window>
+            <Window type="DarkHiro/Label" name="Label3" >
+                <Property name="Area" value="{{0,12},{0,196},{0,90},{0,226}}" />
+                <Property name="Text" value="Resolution" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="LeftAligned" />
+            </Window>
+            <Window type="DarkHiro/Label" name="Label4" >
+                <Property name="Area" value="{{0,176},{0,195},{0,194},{0,225}}" />
+                <Property name="Text" value="x" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="DarkHiro/Combobox" name="bground_combo" >
+                <Property name="Area" value="{{0,103},{0,154},{0,236},{0,184}}" />
+                <Property name="AlwaysOnTop" value="true" />
+                <AutoWindow namePath="__auto_editbox__" >
+                    <Property name="ReadOnly" value="true" />
+                </AutoWindow>
+                <AutoWindow namePath="__auto_droplist__" >
+                    <AutoWindow namePath="__auto_hscrollbar__" >
+                        <AutoWindow namePath="__auto_incbtn__" >
+                            <Property name="Visible" value="false" />
+                            <Property name="RestoreOldCapture" value="true" />
+                        </AutoWindow>
+                        <AutoWindow namePath="__auto_decbtn__" >
+                            <Property name="Visible" value="false" />
+                            <Property name="RestoreOldCapture" value="true" />
+                        </AutoWindow>
+                        <AutoWindow namePath="__auto_thumb__" >
+                            <Property name="RestoreOldCapture" value="true" />
+                        </AutoWindow>
+                    </AutoWindow>
+                    <AutoWindow namePath="__auto_vscrollbar__" >
+                        <AutoWindow namePath="__auto_incbtn__" >
+                            <Property name="Visible" value="false" />
+                            <Property name="RestoreOldCapture" value="true" />
+                        </AutoWindow>
+                        <AutoWindow namePath="__auto_decbtn__" >
+                            <Property name="Visible" value="false" />
+                            <Property name="RestoreOldCapture" value="true" />
+                        </AutoWindow>
+                        <AutoWindow namePath="__auto_thumb__" >
+                            <Property name="RestoreOldCapture" value="true" />
+                        </AutoWindow>
+                    </AutoWindow>
+                </AutoWindow>
+            </Window>
+            <Window type="DarkHiro/Editbox" name="filename_entry" >
+                <Property name="Area" value="{{-0.00152439,84},{0.00630915,49},{-0.00152439,329},{0.00630915,74}}" />
+            </Window>
+            <Window type="DarkHiro/Spinner" name="height_entry" >
+                <Property name="Area" value="{{-0.00152439,197},{0.00946372,195},{-0.00152439,277},{0.00946372,220}}" />
+                <Property name="Text" value="1" />
+                <Property name="CurrentValue" value="1" />
+                <Property name="MaximumValue" value="100000" />
+                <Property name="MinimumValue" value="1" />
+                <AutoWindow namePath="__auto_editbox__" >
+                    <Property name="Text" value="1" />
+                    <Property name="ValidationString" value="-?\d*" />
+                </AutoWindow>
+                <AutoWindow namePath="__auto_decbtn__" >
+                    <Property name="MouseAutoRepeatEnabled" value="true" />
+                </AutoWindow>
+                <AutoWindow namePath="__auto_incbtn__" >
+                    <Property name="MouseAutoRepeatEnabled" value="true" />
+                </AutoWindow>
+            </Window>
+            <Window type="DarkHiro/Editbox" name="path_entry" >
+                <Property name="Area" value="{{0,84},{0.00473186,13},{0,329},{0.00473186,38}}" />
+            </Window>
+            <Window type="DarkHiro/Spinner" name="width_entry" >
+                <Property name="Area" value="{{-0.00152439,93},{0.00946372,195},{-0.00152439,173},{0.00946372,220}}" />
+                <Property name="Text" value="1" />
+                <Property name="CurrentValue" value="1" />
+                <Property name="MaximumValue" value="100000" />
+                <Property name="MinimumValue" value="1" />
+                <AutoWindow namePath="__auto_editbox__" >
+                    <Property name="Text" value="1" />
+                    <Property name="ValidationString" value="-?\d*" />
+                </AutoWindow>
+                <AutoWindow namePath="__auto_decbtn__" >
+                    <Property name="MouseAutoRepeatEnabled" value="true" />
+                </AutoWindow>
+                <AutoWindow namePath="__auto_incbtn__" >
+                    <Property name="MouseAutoRepeatEnabled" value="true" />
+                </AutoWindow>
+            </Window>
+            <Window type="DarkHiro/Label" name="Label6" >
+                <Property name="Area" value="{{0,12},{0,154},{0,100},{0,184}}" />
+                <Property name="Text" value="Background" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="LeftAligned" />
+            </Window>
+            <Window type="DarkHiro/Checkbox" name="overwrite_allowed" >
+                <Property name="Area" value="{{0,84},{0,83},{0,298},{0,108}}" />
+                <Property name="Text" value="Overwrite file" />
+                <Property name="Disabled" value="true" />
+            </Window>
+            <Window type="DarkHiro/Checkbox" name="use_timestamp" >
+                <Property name="Area" value="{{0,84},{0,112},{0,298},{0,137}}" />
+                <Property name="Text" value="Use timestamp as file name" />
+                <Property name="Selected" value="true" />
+            </Window>
+        </Window>
+    </Window>
+</GUILayout>
