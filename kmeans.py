@@ -1,11 +1,13 @@
 import numpy as np
+import math
 
+FACTOR = 416 / 1544
 
 class YOLO_Kmeans:
 
     def __init__(self, cluster_number, filename):
         self.cluster_number = cluster_number
-        self.filename = "2012_train.txt"
+        self.filename = filename
 
     def iou(self, boxes, clusters):  # 1 box -> k clusters
         n = boxes.shape[0]
@@ -88,14 +90,15 @@ class YOLO_Kmeans:
         all_boxes = self.txt2boxes()
         result = self.kmeans(all_boxes, k=self.cluster_number)
         result = result[np.lexsort(result.T[0, None])]
-        self.result2txt(result)
-        print("K anchors:\n {}".format(result))
+        result_scaled = (result * FACTOR).astype(int)
+        self.result2txt(result_scaled)
+        print("K anchors:\n {}".format(result_scaled))
         print("Accuracy: {:.2f}%".format(
             self.avg_iou(all_boxes, result) * 100))
 
 
 if __name__ == "__main__":
-    cluster_number = 9
-    filename = "2012_train.txt"
+    cluster_number = 6
+    filename = "data/train/type1_annotations.txt"
     kmeans = YOLO_Kmeans(cluster_number, filename)
     kmeans.txt2clusters()

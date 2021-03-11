@@ -1,15 +1,68 @@
+#pragma warning(disable: 4996)
+#define GLM_ENABLE_EXPERIMENTAL
+
 #include <cstddef>
 #include <cstdio>
 #include <iostream>
 #include <string>
 #include <HIRO/HIRO.h>
+#include <HIRO/modules/ScanResource.h>
+#include <HIRO/modules/GeometryResource.h>
+#include <HIRO/modules/MeshResource.h>
+#include <COGS/Scan.h>
+#include <COGS/Mesh.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp> 
+#include <glm/gtx/transform.hpp>
+
+
+int box_counter = 0;
+
+void OnFilesDrop(const std::vector<std::string>& filenames)
+{
+    for (const auto& filename : filenames)
+    {
+        if (filename.find(".cogs") != std::string::npos) 
+        {
+            cogs::Scan scan;
+            scan.Import(filename);
+            scan.TransformToSpace(utils::COGS_CAMERA_SPACE);
+            auto scan_resource = std::make_shared<hiro::modules::ScanResource>("scan", scan);
+            hiro::AddResource(scan_resource);
+            box_counter = 0;
+        }
+        else if (filename.find(".txt") != std::string::npos)
+        {
+            if (box_counter == 0)
+            {
+                auto box_resource = std::make_shared<hiro::modules::GeometryResource>(
+                    "box" + std::to_string(box_counter),
+                    hiro::draw::GeometryName::cube
+                    );
+                hiro::AddResource(box_resource);
+            }
+            else
+            {
+                auto box_resource = std::make_shared<hiro::modules::GeometryResource>(
+                    "box" + std::to_string(box_counter),
+                    hiro::draw::GeometryName::sphere_s2
+                    );
+                hiro::AddResource(box_resource);
+            }
+
+            box_counter += 1;
+        }
+    }
+}
 
 int main()
 {
-  hiro::SetAssetDirectory("./hiro_libs/assets/");
+  hiro::SetAssetDirectory("../../../HIRO/resources/");
   hiro::SetIntermediateDirectory("./temp/");
 
   hiro::Initialize();
+
+  hiro::SetFileDropCallback([&](auto files) { OnFilesDrop(files); });
 
   while (hiro::IsOpen())
   {
@@ -19,3 +72,4 @@ int main()
   hiro::Terminate();
   return 0;
 }
+

@@ -18,7 +18,7 @@ def train(annotation_path, classes_path, anchors_path):
     class_names = get_classes(classes_path)
     num_classes = len(class_names)
     anchors = get_anchors(anchors_path)
-    input_shape = (416, 416) # multiple of 32, hw
+    input_shape = (608, 608) # multiple of 32, hw
 
     is_tiny_version = len(anchors)==6 # default setting
     if is_tiny_version:
