@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Class definition of YOLO_v3 style detection model on image and video
 """
@@ -24,8 +23,7 @@ class YOLO(object):
         "classes_path": 'data/classes.txt',
         "score": 0.3,
         "iou": 0.45,
-        "model_image_size": (512, 512),
-        "gpu_num": 1,
+        "model_image_size": (512, 512)
     }
 
     @classmethod

@@ -18,5 +18,5 @@ annotation_path = 'data/train/type1_annotations.txt'
 classes_path = 'data/classes.txt'
 anchors_path = 'data/anchors.txt'
 
-setup_gpu()
+#setup_gpu()
 train(annotation_path, classes_path, anchors_path)

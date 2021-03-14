@@ -1,6 +1,7 @@
 import os
 import sys
 
+
 FILE_SUFFIX = '_datamap.png'
 CLS_NAME = 'wheel'
 TYPE = 1
