@@ -1,5 +1,6 @@
 data/*/
 hiro_visualizer/out
+yolo/logs/
 
 *.vs
 *.idea
