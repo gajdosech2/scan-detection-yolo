@@ -1,9 +1,9 @@
 import sys
+import os
 import tensorflow as tf
 sys.path.insert(0, './yolo')
 
 from train import train
-
 
 def setup_gpu():
     gpus = tf.config.list_physical_devices('GPU')
@@ -18,5 +18,7 @@ annotation_path = 'data/train/type1_annotations.txt'
 classes_path = 'data/classes.txt'
 anchors_path = 'data/anchors.txt'
 
-#setup_gpu()
+if not os.path.exists('yolo/logs'):
+    os.makedirs('yolo/logs')
+setup_gpu()
 train(annotation_path, classes_path, anchors_path)

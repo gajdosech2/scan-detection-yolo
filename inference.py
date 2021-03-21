@@ -2,13 +2,23 @@ import sys
 sys.path.insert(0, './yolo')
 
 import os
+import tensorflow as tf
 from yolo import YOLO
 from PIL import Image
 
 RESULT_PATH = 'result/'
 PROCESS_PATH = 'process/'
 
+def setup_gpu():
+    gpus = tf.config.list_physical_devices('GPU')
+    if gpus:
+        try:
+            for gpu in gpus:
+                tf.config.experimental.set_memory_growth(gpu, True)
+        except RuntimeError as e:
+            print(e)
 
+setup_gpu()
 model = YOLO()
 
 for f in os.listdir(PROCESS_PATH):

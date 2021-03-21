@@ -3,7 +3,7 @@ import sys
 
 
 FILE_SUFFIX = '_datamap.png'
-CLS_NAME = 'wheel'
+CLS_NAMES = ['plate', 'circlet', 'slat', 'part', 'thruster']
 TYPE = 1
 def join_labels(dataset_type):
     if TYPE == 1:
@@ -70,11 +70,11 @@ def join_labels2(dataset_type):
                 y_max = y_center + height // 2
                 
                 print(dataset + '/' + name + FILE_SUFFIX, file=labels, end=' ')
-                print('{},{},{},{},{}'.format(x_min, y_min, x_max, y_max, CLS_NAME), file=labels)
+                print('{},{},{},{},{}'.format(x_min, y_min, x_max, y_max, CLS_NAMES[cls]), file=labels)
               line = single_labels.readline()     
             
     
-def process(dataset_type):    
+def process(dataset_type, cls_idx):    
   path = 'data/_COGS/' + dataset_type + '/'
   datasets = os.listdir(path)
   
@@ -95,17 +95,18 @@ def process(dataset_type):
                     ' --boxes ' + 
                     dataset_path + file + ' ' + 
                     export_path + ' ' + 
-                    dataset_path)
+                    dataset_path + ' ' +
+                    cls_idx)
         else:
-          pass
+          print('OS other than Windows is currently not supported.')
 
 
 
 if __name__ == '__main__':
-  if len(sys.argv) == 1:
-    #process('train')
-    join_labels('train')
-  elif len(sys.argv) == 2:
-    process(sys.argv[1])
-    join_labels(sys.argv[1])
+    if len(sys.argv) == 1:
+        process('train', '0')
+    elif len(sys.argv) == 2:
+        join_labels(sys.argv[1])
+    elif len(sys.argv) == 3:
+        process(sys.argv[1], sys.argv[2])
 

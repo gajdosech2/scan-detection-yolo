@@ -6,9 +6,15 @@ import colorsys
 from timeit import default_timer as timer
 
 import numpy as np
+
 from keras import backend as K
 from keras.models import load_model
 from keras.layers import Input
+
+from tensorflow.compat.v1.keras import backend as K
+import tensorflow as tf
+tf.compat.v1.disable_eager_execution()
+
 from PIL import Image, ImageFont, ImageDraw
 
 from model import yolo_eval, yolo_body, tiny_yolo_body
@@ -23,7 +29,7 @@ class YOLO(object):
         "classes_path": 'data/classes.txt',
         "score": 0.3,
         "iou": 0.45,
-        "model_image_size": (512, 512)
+        "model_image_size": (800, 800)
     }
 
     @classmethod
