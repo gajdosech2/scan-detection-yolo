@@ -8,7 +8,6 @@ from PIL import Image
 RESULT_PATH = 'result/'
 PROCESS_PATH = 'process/'
 
-
 model = YOLO()
 
 for f in os.listdir(PROCESS_PATH):
