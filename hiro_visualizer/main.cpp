@@ -16,19 +16,28 @@
 #include <glm/gtx/transform.hpp>
 
 
-int box_counter = 0;
+void DrawScan(const std::string& filename)
+{
+    cogs::Scan scan;
+    scan.Import(filename);
 
+    scan.ChangeCameraBasisDefinition(utils::COGS_CAMERA_SPACE);
+    auto vmatrix = scan.GetCameraParams().view;
+    scan.Transform(vmatrix, utils::COGS_CAMERA_SPACE);
+
+    auto scan_resource = std::make_shared<hiro::modules::ScanResource>("scan", scan);
+    hiro::AddResource(scan_resource);
+}
+
+
+int box_counter = 0;
 void OnFilesDrop(const std::vector<std::string>& filenames)
 {
     for (const auto& filename : filenames)
     {
         if (filename.find(".cogs") != std::string::npos) 
         {
-            cogs::Scan scan;
-            scan.Import(filename);
-            scan.TransformToSpace(utils::COGS_CAMERA_SPACE);
-            auto scan_resource = std::make_shared<hiro::modules::ScanResource>("scan", scan);
-            hiro::AddResource(scan_resource);
+            DrawScan(filename);
             box_counter = 0;
         }
         else if (filename.find(".txt") != std::string::npos)
@@ -55,21 +64,25 @@ void OnFilesDrop(const std::vector<std::string>& filenames)
     }
 }
 
-int main()
+void visualize()
 {
-  hiro::SetAssetDirectory("../../../HIRO/resources/");
-  hiro::SetIntermediateDirectory("./temp/");
+    hiro::SetAssetDirectory("../../../HIRO/resources/");
+    hiro::SetIntermediateDirectory("./temp/");
 
-  hiro::Initialize();
+    hiro::Initialize();
 
-  hiro::SetFileDropCallback([&](auto files) { OnFilesDrop(files); });
+    hiro::SetFileDropCallback([&](auto files) { OnFilesDrop(files); });
 
-  while (hiro::IsOpen())
-  {
-    hiro::Update();
-  }
+    while (hiro::IsOpen())
+    {
+        hiro::Update();
+    }
 
-  hiro::Terminate();
-  return 0;
+    hiro::Terminate(); 
 }
 
+int main()
+{
+    visualize();
+    return 0;
+}
