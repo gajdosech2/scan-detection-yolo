@@ -34,8 +34,6 @@ def convert(dataset):
             cls_id = classes.index(cls)
             xmlbox = obj.find('bndbox')
             b = (int(xmlbox.find('xmin').text), int(xmlbox.find('ymin').text), int(xmlbox.find('xmax').text), int(xmlbox.find('ymax').text))
-            w, h = abs(b[2] - b[0]), abs(b[3] - b[1])
-            b = [b[0]+w/2, b[1]+h/2, w, h]
             out_file.write(','.join([str(int(a)) for a in b]) + ',' + str(cls_id) + '\n')
         
         out_file.close()

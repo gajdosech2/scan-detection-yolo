@@ -21,9 +21,9 @@ void DrawScan(const std::string& filename)
     cogs::Scan scan;
     scan.Import(filename);
 
-    scan.ChangeCameraBasisDefinition(utils::COGS_CAMERA_SPACE);
+    scan.ChangeCameraBasisDefinition(utils::PHOXI_CAMERA_SPACE);
     auto vmatrix = scan.GetCameraParams().view;
-    scan.Transform(vmatrix, utils::COGS_CAMERA_SPACE);
+    scan.Transform(vmatrix, utils::PHOXI_CAMERA_SPACE);
 
     auto scan_resource = std::make_shared<hiro::modules::ScanResource>("scan", scan);
     hiro::AddResource(scan_resource);

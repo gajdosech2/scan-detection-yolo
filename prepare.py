@@ -3,7 +3,7 @@ import sys
 
 
 FILE_SUFFIX = '_datamap.png'
-CLS_NAMES = ['circlet', 'plate', 'thruster', 'slat', 'part']
+CLS_NAMES = ['plate', 'thruster', 'circlet', 'slat', 'part']
 TYPE = 1
 def join_labels(dataset_type):
         if TYPE == 1:
@@ -31,11 +31,7 @@ def join_labels1(dataset_type):
                         while line:
                             coords = line.split(',')
                             if len(coords) == 5:
-                                x_center, y_center, width, height, cls = [int(c) for c in coords]
-                                x_min = x_center - width // 2
-                                y_min = y_center - height // 2
-                                x_max = x_center + width // 2
-                                y_max = y_center + height // 2
+                                x_min, y_min, x_max, y_max, cls = [int(c) for c in coords]
                                 
                                 if space:
                                     print(' ', file=labels, end='')
@@ -63,11 +59,7 @@ def join_labels2(dataset_type):
                         while line:
                             coords = line.split(',')
                             if len(coords) == 5:
-                                x_center, y_center, width, height, cls = [int(c) for c in coords]
-                                x_min = x_center - width // 2
-                                y_min = y_center - height // 2
-                                x_max = x_center + width // 2
-                                y_max = y_center + height // 2
+                                x_min, y_min, x_max, y_max, cls = [int(c) for c in coords]
                                 
                                 print(dataset + '/' + name + FILE_SUFFIX, file=labels, end=' ')
                                 print('{},{},{},{},{}'.format(x_min, y_min, x_max, y_max, CLS_NAMES[cls]), file=labels)
