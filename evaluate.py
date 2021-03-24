@@ -67,9 +67,13 @@ def calculate(true_boxes, found_boxes):
     true_positives = len(matched_boxes)
     false_positives = len(found_boxes)
     false_negatives = len(true_boxes)
-    avg_iou = total_iou / true_positives
-    precision = true_positives / (true_positives + false_positives)
-    recall = true_positives / (true_positives + false_negatives)
+    precision, recall, avg_iou = 0, 0, 0
+    if true_positives:   
+        avg_iou = total_iou / true_positives
+    if true_positives + false_positives:
+        precision = true_positives / (true_positives + false_positives)
+    if true_positives + false_negatives:
+        recall = true_positives / (true_positives + false_negatives)
      
     print(f'TP={true_positives}, FP={false_positives}, FN={false_negatives}')
     print(f'min_iou={min_iou:.3f}, max_iou={max_iou:.3f}, avg_iou={avg_iou:.3f}')
