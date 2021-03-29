@@ -1,1 +1,3 @@
+plate
+thruster
 circlet
