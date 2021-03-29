@@ -41,7 +41,7 @@ def calculate(true_boxes, found_boxes):
     matched_boxes = []
     
     total_iou = 0
-    min_iou = 1
+    min_iou = 0
     max_iou = 0
     while True:
         best_pair = []
@@ -54,12 +54,13 @@ def calculate(true_boxes, found_boxes):
                     best_pair = [b1, b2]
                     best_iou = current_iou
                     
+        
         if best_iou > IoU_threshold:
             matched_boxes.append(best_pair)
             true_boxes.remove(best_pair[0])
             found_boxes.remove(best_pair[1])
             total_iou += best_iou
-            min_iou = min(min_iou, best_iou)
+            min_iou = min(1 if not min_iou else min_iou, best_iou)
             max_iou = max(max_iou, best_iou)
         else:
             break
@@ -67,7 +68,7 @@ def calculate(true_boxes, found_boxes):
     true_positives = len(matched_boxes)
     false_positives = len(found_boxes)
     false_negatives = len(true_boxes)
-    precision, recall, avg_iou = 0, 0, 0
+    precision, recall, avg_iou = 1, 0, 0
     if true_positives:   
         avg_iou = total_iou / true_positives
     if true_positives + false_positives:
@@ -77,7 +78,11 @@ def calculate(true_boxes, found_boxes):
      
     print(f'TP={true_positives}, FP={false_positives}, FN={false_negatives}')
     print(f'min_iou={min_iou:.3f}, max_iou={max_iou:.3f}, avg_iou={avg_iou:.3f}')
-    print(f'precision={precision:.3f}, recall={recall:.3f}\n')
+    
+    f1 = 0
+    if (precision + recall) > 0:
+        f1 = 2 * (precision * recall) / (precision + recall)
+    print(f'precision={precision:.3f}, recall={recall:.3f}, f1={f1:.3f}\n')
     
     
 def evaluate():
