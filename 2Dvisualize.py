@@ -40,7 +40,7 @@ def visualize(path):
             while line:
                 x1, y1, x2, y2, clss = [int(i) for i in line.split(',')]        
                 color = ['g','r','b','y','m'][clss]
-                rect = patches.Rectangle((x1, y1), x2-x1, y2-y1, linewidth=2, edgecolor=color, facecolor='none')
+                rect = patches.Rectangle((x1, y1), x2-x1, y2-y1, linewidth=1, edgecolor=color, facecolor='none')
                 ax.add_patch(rect)                                        
                 line = f.readline()
         j += 1

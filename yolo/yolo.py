@@ -22,7 +22,7 @@ class YOLO(object):
         "model_path": 'yolo/trained_weights_final.h5',
         "anchors_path": 'data/anchors.txt',
         "classes_path": 'data/classes.txt',
-        "score" : 0.3,
+        "score" : 0.325,
         "iou" : 0.45,
         "model_image_size" : (608, 608),
         "gpu_num" : 1,
