@@ -1,9 +1,9 @@
 import os
 
 
-process = 'process/'
-result = 'result/'
-IoU_threshold = 0.45
+PROCESS_PATH = 'process/'
+RESULT_PATH = 'result/'
+IoU_THRESH = 0.45
 
 
 def area(b):
@@ -13,10 +13,9 @@ def area(b):
 def intersection(b1, b2):
     dx = min(b1[2], b2[2]) - max(b1[0], b2[0])
     dy = min(b1[3], b2[3]) - max(b1[1], b2[1])
-    if (dx>=0) and (dy>=0):
+    if (dx >= 0) and (dy >= 0):
         return dx * dy
-    else:
-        return 0
+    return 0
     
     
 def iou(b1, b2):
@@ -53,9 +52,8 @@ def calculate(true_boxes, found_boxes):
                 if current_iou > best_iou:
                     best_pair = [b1, b2]
                     best_iou = current_iou
-                    
-        
-        if best_iou > IoU_threshold:
+
+        if best_iou > IoU_THRESH:
             matched_boxes.append(best_pair)
             true_boxes.remove(best_pair[0])
             found_boxes.remove(best_pair[1])
@@ -86,11 +84,11 @@ def calculate(true_boxes, found_boxes):
     
     
 def evaluate():
-    files = os.listdir(result)
+    files = os.listdir(RESULT_PATH)
     for f in files:
         if '.txt' in f: 
-            true_boxes = load_boxes(process + f)
-            found_boxes = load_boxes(result + f)
+            true_boxes = load_boxes(PROCESS_PATH + f)
+            found_boxes = load_boxes(RESULT_PATH + f)
             print(f'=== {f[:-4]} EVALUATION ===')
             print(f'true boxes={len(true_boxes)}, found boxes={len(found_boxes)}')
             calculate(true_boxes[:], found_boxes[:])
@@ -98,6 +96,3 @@ def evaluate():
             
 if __name__ == '__main__':
     evaluate()
-            
-    
-    

@@ -7,17 +7,16 @@ DATA_ROOT = 'data/inference/'
 SUFFIX_LENGTH = 14
 CLASSES_PATH = 'data/classes.txt'
 
+
 def convert(dataset):
     def get_classes(classes_path):
         with open(classes_path) as f:
             class_names = f.readlines()
         return [c.strip() for c in class_names]
 
-
     classes = get_classes(CLASSES_PATH)
     assert len(classes) > 0, 'no class names detected!'
     print(f'num classes: {len(classes)}')
-
 
     for path in glob(os.path.join(dataset, '*.xml')):
         in_file = open(path)

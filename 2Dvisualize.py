@@ -1,11 +1,8 @@
 import os
 import sys
-import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
-import matplotlib.gridspec as gridspec
-import random
 
 FILE_SUFFIX = '_datamap.png'
 DIM = 2
@@ -34,12 +31,12 @@ def visualize(path):
                 
         ax = plt.subplot(DIM, DIM, j+1, autoscale_on=True, frame_on=False, xmargin=0, ymargin=0)
         ax.axis('off') 
-        imgplot = plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+        plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
         with open(path + '/' + name + '.txt', 'r') as f:
             line = f.readline()
             while line:
                 x1, y1, x2, y2, clss = [int(i) for i in line.split(',')]        
-                color = ['g','r','b','y','m'][clss]
+                color = ['g', 'r', 'b', 'y', 'm'][clss]
                 rect = patches.Rectangle((x1, y1), x2-x1, y2-y1, linewidth=1, edgecolor=color, facecolor='none')
                 ax.add_patch(rect)                                        
                 line = f.readline()

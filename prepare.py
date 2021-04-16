@@ -5,11 +5,13 @@ import sys
 FILE_SUFFIX = '_datamap.png'
 CLS_NAMES = ['plate', 'thruster', 'circlet', 'slat', 'part']
 TYPE = 1
+
+
 def join_labels(dataset_type):
-        if TYPE == 1:
-                join_labels1(dataset_type)
-        elif TYPE == 2:
-                join_labels2(dataset_type)
+    if TYPE == 1:
+        join_labels1(dataset_type)
+    elif TYPE == 2:
+        join_labels2(dataset_type)
                 
 
 def join_labels1(dataset_type):
@@ -91,7 +93,6 @@ def process(dataset_type, cls_idx):
                                         cls_idx)
                 else:
                     print('OS other than Windows is currently not supported.')
-
 
 
 if __name__ == '__main__':

@@ -2,7 +2,6 @@ import sys
 import cv2
 import os
 import numpy as np
-import plotly
 import plotly.graph_objs as go
 
 FILE_SUFFIX = '_zmap.png'
@@ -88,7 +87,6 @@ def bounding_box(minz, maxz, x1, y1, x2, y2):
                                 z=[maxz]*5, 
                                 mode="lines", line=line))
 
-                                
     objects.append(go.Scatter3d(x=[x1, x1], 
                                 y=[y1, y1], 
                                 z=[minz, maxz], 
