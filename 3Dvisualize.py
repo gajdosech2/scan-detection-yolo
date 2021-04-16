@@ -1,5 +1,6 @@
 import sys
 import cv2
+import os
 import numpy as np
 import plotly
 import plotly.graph_objs as go
@@ -111,8 +112,21 @@ def bounding_box(minz, maxz, x1, y1, x2, y2):
     return objects
 
 
+def pick_name():
+    files = os.listdir('result/')
+    for f in files:
+        without_suffix = f.split('.')[0]
+        return '_'.join(without_suffix.split('_'[:1]))
+    return ''
+
+
 if __name__ == "__main__":
     if len(sys.argv) == 1:
-        plot_depthmap('process/example_009')
+        name = pick_name()
+        if name == '':
+            print('There are no result files!')
+        else:
+            print(f'visualizing: {name}')
+            plot_depthmap('result/' + name)
     else:
         plot_depthmap(sys.argv[1])

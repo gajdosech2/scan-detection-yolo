@@ -16,14 +16,17 @@
 #include <glm/gtx/transform.hpp>
 
 
-void DrawScan(const std::string& filename)
+void DrawScan(const std::string& filename, bool change_camera=false)
 {
     cogs::Scan scan;
     scan.Import(filename);
 
-    scan.ChangeCameraBasisDefinition(utils::PHOXI_CAMERA_SPACE);
-    auto vmatrix = scan.GetCameraParams().view;
-    scan.Transform(vmatrix, utils::PHOXI_CAMERA_SPACE);
+    if (change_camera)
+    {
+        scan.ChangeCameraBasisDefinition(utils::PHOXI_CAMERA_SPACE);
+        auto vmatrix = scan.GetCameraParams().view;
+        scan.Transform(vmatrix, utils::PHOXI_CAMERA_SPACE);
+    }
 
     auto scan_resource = std::make_shared<hiro::modules::ScanResource>("scan", scan);
     hiro::AddResource(scan_resource);
@@ -31,13 +34,13 @@ void DrawScan(const std::string& filename)
 
 
 int box_counter = 0;
-void OnFilesDrop(const std::vector<std::string>& filenames)
+void OnFilesDropBox(const std::vector<std::string>& filenames)
 {
     for (const auto& filename : filenames)
     {
         if (filename.find(".cogs") != std::string::npos) 
         {
-            DrawScan(filename);
+            DrawScan(filename, true);
             box_counter = 0;
         }
         else if (filename.find(".txt") != std::string::npos)
@@ -64,9 +67,20 @@ void OnFilesDrop(const std::vector<std::string>& filenames)
     }
 }
 
+void OnFilesDrop(const std::vector<std::string>& filenames)
+{
+    for (const auto& filename : filenames)
+    {
+        if (filename.find(".cogs") != std::string::npos)
+        {
+            DrawScan(filename);
+        }
+    }
+}
+
 void visualize()
 {
-    hiro::SetAssetDirectory("../../../HIRO/resources/");
+    hiro::SetAssetDirectory("./resources/");
     hiro::SetIntermediateDirectory("./temp/");
 
     hiro::Initialize();
