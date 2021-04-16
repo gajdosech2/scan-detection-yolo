@@ -18,7 +18,7 @@ def join_labels1(dataset_type):
     path = 'data/' + dataset_type + '/'
     datasets = [dataset for dataset in os.listdir(path) if os.path.isdir(path + dataset)]
      
-    with open(path + 'annotations.txt', 'w') as labels:
+    with open(path + '/' + 'annotations.txt', 'w') as labels:
         for dataset in datasets:
             dataset_path = path + '/' + dataset
             for file in os.listdir(dataset_path):
