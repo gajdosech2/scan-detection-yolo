@@ -138,7 +138,7 @@ def create_tiny_model(input_shape, anchors, num_classes, load_pretrained=False, 
     '''create the training model, for Tiny YOLOv3'''
     K.clear_session() # get a new session
     h, w = input_shape
-    image_input = Input(shape=(608, 608, 4))
+    image_input = Input(shape=(None, None, 4))
     num_anchors = len(anchors)
 
     y_true = [Input(shape=(h//{0:32, 1:16}[l], w//{0:32, 1:16}[l], \
