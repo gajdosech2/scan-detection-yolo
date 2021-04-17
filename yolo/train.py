@@ -3,6 +3,7 @@ Retrain the YOLO model for your own dataset.
 """
 
 import numpy as np
+import json
 import keras.backend as K
 from keras.layers import Input, Lambda
 from keras.models import Model
@@ -34,7 +35,7 @@ def train(annotation_path, classes_path, anchors_path):
     checkpoint = ModelCheckpoint(log_dir + 'ep{epoch:03d}-loss{loss:.3f}-val_loss{val_loss:.3f}.h5',
         monitor='val_loss', save_weights_only=True, save_best_only=True, period=3)
     reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=16, verbose=1)
-    early_stopping = EarlyStopping(monitor='val_loss', min_delta=0, patience=32, verbose=1)
+    early_stopping = EarlyStopping(monitor='val_loss', min_delta=0, patience=16, verbose=1)
 
     val_split = 0.1
     with open(annotation_path) as f:
@@ -47,6 +48,10 @@ def train(annotation_path, classes_path, anchors_path):
     
     if SAVE_DIAGRAM:
         plot_model(model, show_shapes=True)
+        
+    history = dict()
+    history['loss'] = list()
+    history['val_loss'] = list()
 
     # Train with frozen layers first, to get a stable loss.
     # Adjust num epochs to your dataset. This step is enough to obtain a not bad model.
@@ -57,13 +62,15 @@ def train(annotation_path, classes_path, anchors_path):
 
         batch_size = 10
         print('Train on {} samples, val on {} samples, with batch size {}.'.format(num_train, num_val, batch_size))
-        model.fit_generator(data_generator_wrapper(lines[:num_train], batch_size, input_shape, anchors, num_classes),
-                steps_per_epoch=max(1, num_train//batch_size),
-                validation_data=data_generator_wrapper(lines[num_train:], batch_size, input_shape, anchors, num_classes),
-                validation_steps=max(1, num_val//batch_size),
-                epochs=50,
-                initial_epoch=0,
-                callbacks=[logging, checkpoint])
+        h = model.fit_generator(data_generator_wrapper(lines[:num_train], batch_size, input_shape, anchors, num_classes),
+                                steps_per_epoch=max(1, num_train//batch_size),
+                                validation_data=data_generator_wrapper(lines[num_train:], batch_size, input_shape, anchors, num_classes),
+                                validation_steps=max(1, num_val//batch_size),
+                                epochs=50,
+                                initial_epoch=0,
+                                callbacks=[logging, checkpoint])
+        history['loss'] += [float(v) for v in h.history['loss']]
+        history['val_loss'] += [float(v) for v in h.history['val_loss']]
         model.save_weights(log_dir + 'trained_weights_stage_1.h5')
 
     # Unfreeze and continue training, to fine-tune.
@@ -76,15 +83,19 @@ def train(annotation_path, classes_path, anchors_path):
 
         batch_size = 10 # note that more GPU memory is required after unfreezing the body
         print('Train on {} samples, val on {} samples, with batch size {}.'.format(num_train, num_val, batch_size))
-        model.fit_generator(data_generator_wrapper(lines[:num_train], batch_size, input_shape, anchors, num_classes),
-            steps_per_epoch=max(1, num_train//batch_size),
-            validation_data=data_generator_wrapper(lines[num_train:], batch_size, input_shape, anchors, num_classes),
-            validation_steps=max(1, num_val//batch_size),
-            epochs=150,
-            initial_epoch=50,
-            callbacks=[logging, checkpoint, reduce_lr, early_stopping])
+        h = model.fit_generator(data_generator_wrapper(lines[:num_train], batch_size, input_shape, anchors, num_classes),
+                                steps_per_epoch=max(1, num_train//batch_size),
+                                validation_data=data_generator_wrapper(lines[num_train:], batch_size, input_shape, anchors, num_classes),
+                                validation_steps=max(1, num_val//batch_size),
+                                epochs=150,
+                                initial_epoch=50,
+                                callbacks=[logging, checkpoint, reduce_lr, early_stopping])
+        history['loss'] += [float(v) for v in h.history['loss']]
+        history['val_loss'] += [float(v) for v in h.history['val_loss']]
         model.save_weights(log_dir + 'trained_weights_final.h5')
 
+    with open('history.json', 'w') as histfile:
+        json.dump(history, histfile)
     # Further training if needed.
 
 
