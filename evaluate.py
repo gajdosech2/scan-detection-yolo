@@ -30,7 +30,7 @@ def load_boxes(path):
         line = boxes_file.readline().strip()
         while line:
             box = [int(c) for c in line.split(',')]
-            boxes.append(box[:-1])
+            boxes.append(box)
             line = boxes_file.readline().strip()
             
     return boxes  
@@ -48,10 +48,11 @@ def calculate(true_boxes, found_boxes):
         
         for b1 in true_boxes:
             for b2 in found_boxes:
-                current_iou = iou(b1, b2)
-                if current_iou > best_iou:
-                    best_pair = [b1, b2]
-                    best_iou = current_iou
+                if b1[-1] == b2[-1]:
+                    current_iou = iou(b1, b2)
+                    if current_iou > best_iou:
+                        best_pair = [b1, b2]
+                        best_iou = current_iou
 
         if best_iou > IoU_THRESH:
             matched_boxes.append(best_pair)
