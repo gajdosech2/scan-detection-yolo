@@ -7,6 +7,6 @@ yolo/logs
 *.h5
 .ipynb_checkpoints
 
-process
-result
+process*
+result*
 

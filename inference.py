@@ -14,6 +14,7 @@ PROCESS_PATH = 'process/'
 DATA_SUFFIX = '_datamap.png'
 CLEAN_UP = False
 SHOW = False
+SCORE_THRESHOLD = 0.375
 
 
 def input_files():
@@ -31,7 +32,7 @@ def input_files():
 
 
 def inference():
-    model = YOLO()
+    model = YOLO(score=SCORE_THRESHOLD)
 
     for f in os.listdir(PROCESS_PATH):
         if f.endswith(DATA_SUFFIX):

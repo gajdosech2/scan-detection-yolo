@@ -83,16 +83,30 @@ def calculate(true_boxes, found_boxes):
         f1 = 2 * (precision * recall) / (precision + recall)
     print(f'precision={precision:.3f}, recall={recall:.3f}, f1={f1:.3f}\n')
     
+    return avg_iou, precision, recall, f1
+    
     
 def evaluate():
     files = os.listdir(RESULT_PATH)
+    avg_iou, avg_precision, avg_recall, avg_f1 = 0, 0, 0, 0
+    data_count = 0
     for f in files:
         if '.txt' in f: 
+            data_count += 1
             true_boxes = load_boxes(PROCESS_PATH + f)
             found_boxes = load_boxes(RESULT_PATH + f)
+            
             print(f'=== {f[:-4]} EVALUATION ===')
             print(f'true boxes={len(true_boxes)}, found boxes={len(found_boxes)}')
-            calculate(true_boxes[:], found_boxes[:])
+            
+            iou, precision, recall, f1 = calculate(true_boxes[:], found_boxes[:])
+            avg_iou += iou
+            avg_precision += precision
+            avg_recall += recall
+            avg_f1 += f1
+            
+    print(f'=== TOTAL EVALUATION ===')
+    print(f'AVG IoU={avg_iou/data_count}, AVG F1={avg_f1/data_count}, AVG Precision={avg_precision/data_count}, AVG Recall={avg_recall/data_count}')
             
             
 if __name__ == '__main__':

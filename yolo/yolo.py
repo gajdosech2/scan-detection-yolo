@@ -23,7 +23,7 @@ class YOLO(object):
         "anchors_path": 'data/anchors.txt',
         "classes_path": 'data/classes.txt',
         "score" : 0.325,
-        "iou" : 0.45,
+        "iou" : 0.5,
         "model_image_size" : (608, 608),
         "gpu_num" : 1,
     }
