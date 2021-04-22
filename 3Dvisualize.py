@@ -3,6 +3,7 @@ import cv2
 import os
 import numpy as np
 import plotly.graph_objs as go
+import random
 
 FILE_SUFFIX = '_zmap.png'
 BOXES_SUFFIX = '.txt'
@@ -51,6 +52,7 @@ def get_points(depthmap):
     
 def plot_depthmap(data_path):  
     depthmap_path = data_path + FILE_SUFFIX
+    
     boxes_path = data_path + BOXES_SUFFIX
     
     depthmap = load_depthmap(depthmap_path)
@@ -112,6 +114,7 @@ def bounding_box(minz, maxz, x1, y1, x2, y2):
 
 def pick_name():
     files = os.listdir('result/')
+    random.shuffle(files)
     for f in files:
         without_suffix = f.split('.')[0]
         return '_'.join(without_suffix.split('_'[:1]))

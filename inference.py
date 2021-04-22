@@ -7,14 +7,14 @@ import time
 from yolo import YOLO
 from PIL import Image
 
-#os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 RESULT_PATH = 'result/'
 PROCESS_PATH = 'process/'
 DATA_SUFFIX = '_datamap.png'
 CLEAN_UP = False
 SHOW = False
-SCORE_THRESHOLD = 0.375
+SCORE_THRESHOLD = 0.21
 
 
 def input_files():

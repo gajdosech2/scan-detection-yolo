@@ -35,7 +35,7 @@ def train(annotation_path, classes_path, anchors_path):
     checkpoint = ModelCheckpoint(log_dir + 'ep{epoch:03d}-loss{loss:.3f}-val_loss{val_loss:.3f}.h5',
         monitor='val_loss', save_weights_only=True, save_best_only=True, period=3)
     reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=16, verbose=1)
-    early_stopping = EarlyStopping(monitor='val_loss', min_delta=0, patience=16, verbose=1)
+    early_stopping = EarlyStopping(monitor='val_loss', min_delta=0, patience=32, verbose=1)
 
     val_split = 0.1
     with open(annotation_path) as f:
@@ -48,6 +48,8 @@ def train(annotation_path, classes_path, anchors_path):
     
     if SAVE_DIAGRAM:
         plot_model(model, show_shapes=True)
+        
+    print(model.summary())
         
     history = dict()
     history['loss'] = list()
@@ -87,7 +89,7 @@ def train(annotation_path, classes_path, anchors_path):
                                 steps_per_epoch=max(1, num_train//batch_size),
                                 validation_data=data_generator_wrapper(lines[num_train:], batch_size, input_shape, anchors, num_classes),
                                 validation_steps=max(1, num_val//batch_size),
-                                epochs=150,
+                                epochs=200,
                                 initial_epoch=50,
                                 callbacks=[logging, checkpoint, reduce_lr, early_stopping])
         history['loss'] += [float(v) for v in h.history['loss']]

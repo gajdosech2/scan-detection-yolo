@@ -76,12 +76,12 @@ def calculate(true_boxes, found_boxes):
         recall = true_positives / (true_positives + false_negatives)
      
     print(f'TP={true_positives}, FP={false_positives}, FN={false_negatives}')
-    print(f'min_iou={min_iou:.3f}, max_iou={max_iou:.3f}, avg_iou={avg_iou:.3f}')
+    print(f'min_iou={min_iou:.4f}, max_iou={max_iou:.4f}, avg_iou={avg_iou:.4f}')
     
     f1 = 0
     if (precision + recall) > 0:
         f1 = 2 * (precision * recall) / (precision + recall)
-    print(f'precision={precision:.3f}, recall={recall:.3f}, f1={f1:.3f}\n')
+    print(f'precision={precision:.4f}, recall={recall:.4f}, f1={f1:.4f}\n')
     
     return avg_iou, precision, recall, f1
     
