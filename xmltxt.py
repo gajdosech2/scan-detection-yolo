@@ -30,8 +30,7 @@ def convert(dataset):
         
         for obj in root.iter('object'):
             cls = obj.find('name').text 
-            #cls_id = classes.index(cls)
-            cls_id = 0
+            cls_id = classes.index(cls)
             xmlbox = obj.find('bndbox')
             b = (int(xmlbox.find('xmin').text), int(xmlbox.find('ymin').text), int(xmlbox.find('xmax').text), int(xmlbox.find('ymax').text))
             out_file.write(','.join([str(int(a)) for a in b]) + ',' + str(cls_id) + '\n')
