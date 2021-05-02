@@ -14,7 +14,7 @@ PROCESS_PATH = 'process/'
 DATA_SUFFIX = '_datamap.png'
 CLEAN_UP = False
 SHOW = False
-SCORE_THRESHOLD = 0.21
+SCORE_THRESHOLD = 0.41
 
 
 def input_files():
