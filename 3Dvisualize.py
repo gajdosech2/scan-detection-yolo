@@ -34,6 +34,7 @@ def load_boxes(path):
 
 def load_depthmap(path):
     image = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
+    print(path)
     image = cv2.resize(image, (0, 0), fx=0.25, fy=0.25, interpolation=cv2.INTER_NEAREST)
     return image
     
@@ -117,7 +118,7 @@ def pick_name():
     random.shuffle(files)
     for f in files:
         without_suffix = f.split('.')[0]
-        return '_'.join(without_suffix.split('_'[:1]))
+        return '_'.join(without_suffix.split('_')[:2])
     return ''
 
 
